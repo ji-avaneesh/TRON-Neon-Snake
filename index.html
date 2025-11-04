@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON Neon Snake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loading-screen" class="screen active-screen">
+        <div class="loading-container">
+            <div class="hexagon"></div>
+            <p class="loading-text">INITIALIZING SYSTEM...</p>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+            <p class="loading-percent" id="loading-percent">0%</p>
+        </div>
+    </div>
+
+    <div id="home-screen" class="screen">
+        <div class="neon-grid"></div>
+        <div id="home-hexagon"></div>
+        <h1 id="game-title">NEON SNAKE</h1>
+        <div id="home-buttons">
+            <button id="play-btn" class="home-btn">▶ PLAY</button>
+            <button id="leaderboard-btn" class="home-btn">🏆 Leaderboard</button>
+            <button id="settings-btn" class="home-btn">⚙ Settings</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="game-top-bar">
+            <div class="score-box">
+                Score: <span id="score">0</span>
+            </div>
+            <div class="highscore-box">
+                High Score: <span id="highscore">0</span>
+            </div>
+            <button id="pause-btn" class="pause-btn">II</button>
+        </div>
+        <canvas id="game-board"></canvas>
+        <div class="game-bottom">
+            <button id="restart-btn" class="neon-btn">Restart</button>
+            <button id="home-back-btn" class="neon-btn">Home</button>
+        </div>
+    </div>
+
+    <div id="settings-screen" class="screen">
+        <h1 class="neon-title">SETTINGS</h1>
+        <div class="settings-list">
+
+            <div class="setting-item">
+                <label>Snake Skin</label>
+                <select id="skin-select" class="settings-select">
+                    <option value="classic">Classic</option>
+                    <option value="neon">Neon</option>
+                    <option value="fire">Fire</option>
+                    <option value="ice">Ice</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label>Grid Size</label>
+                <select id="grid-select">
+                    <option value="20">Small</option>
+                    <option value="25">Medium</option>
+                    <option value="30">Large</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label>Wall Mode</label>
+                <label class="toggle">
+                    <input type="checkbox" id="wall-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <label>Sound</label>
+                <label class="toggle">
+                    <input type="checkbox" id="sound-toggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+             <div class="setting-item">
+                <label>Volume</label>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.8">
+            </div>
+
+            <div class="setting-item">
+                <label>AI Snake</label>
+                <button id="ai-select-btn" class="neon-mini-btn">
+                    Select Difficulty
+                </button>
+            </div>
+
+            <button id="settings-back-btn" class="neon-btn">Back</button>
+        </div>
+    </div>
+
+    <div id="leaderboard-screen" class="screen">
+        <h1 class="screen-title neon-title">🏆 Leaderboard</h1>
+        <div id="leaderboard-list"></div>
+        <button class="neon-btn" id="clear-leaderboard">Clear Leaderboard</button>
+        <button class="neon-btn" id="leaderboard-back-btn">Back</button>
+    </div>
+
+    <div id="ai-modal" class="modal">
+        <div class="modal-content">
+            <h2>Select AI Difficulty</h2>
+            <button class="ai-btn" data-level="easy">Easy</button>
+            <button class="ai-btn" data-level="medium">Medium</button>
+            <button class="ai-btn" data-level="hard">Hard</button>
+            <button id="ai-close-btn" class="neon-btn">Cancel</button>
+        </div>
+    </div>
+
+    <div id="pause-menu" class="pause-hidden">
+        <div class="pause-panel">
+            <h2 class="pause-title">⏸ Game Paused</h2>
+            <button class="pause-btn" id="resume-btn">▶ Resume</button>
+            <button class="pause-btn" id="pause-restart-btn">🔄 Restart</button>
+            <button class="pause-btn" id="pause-quit-btn">🏠 Quit to Home</button>
+        </div>
+    </div>
+    
+    <div id="game-over-screen" class="screen hidden">
+        <h1 id="game-over-text" class="neon-title">GAME OVER</h1>
+        <p class="final-score-label">Final Score:</p>
+        <p id="final-score" class="final-score">0</p>
+        <button id="btn-replay" class="btn neon-btn">REPLAY</button>
+        <button id="btn-go-home" class="btn neon-btn secondary">HOME</button>
+    </div>
+
+    <div id="death-flash"></div>
+    <div id="shockwave"></div>
+
+    <div id="mobile-controls">
+        <div class="mc-row">
+            <button class="mc-btn" data-dir="up">▲</button>
+        </div>
+        <div class="mc-row">
+            <button class="mc-btn" data-dir="left">◀</button>
+            <button class="mc-btn" data-dir="down">▼</button>
+            <button class="mc-btn" data-dir="right">▶</button>
+        </div>
+    </div>
+
+    <audio id="eat-sound" src="sounds/eat.mp3"></audio>
+    <audio id="death-sound" src="sounds/death.mp3"></audio>
+    <audio id="click-sound" src="sounds/click.mp3"></audio>
+    <audio id="boot-sound" src="sounds/boot.mp3"></audio>
+    <audio id="ui-sound" src="sounds/ui.mp3"></audio>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
